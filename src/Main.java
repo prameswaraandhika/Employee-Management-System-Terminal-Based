@@ -22,13 +22,88 @@ public class Main {
     }
 
     private static void editEmployee() {
+        System.out.println("Edit feature");
+        System.out.println("Enter employee id or type 'x' to cancel");
+        String input = sc.nextLine();
+        if (input.equalsIgnoreCase("x")) {
+            System.out.println("Updated canceled...");
+            displayMenu();
+        }
+
+        try {
+
+            long id = Long.parseLong(input);
+            for (Employee employee : listEmployee) {
+                if (employee.getId() == id) {
+                    System.out.print("name: ");
+                    String updateName = sc.nextLine();
+                    if (updateName.equalsIgnoreCase("x")) {
+                        displayMenu();
+                        break;
+                    } else {
+                        employee.setName(updateName);
+                    }
+                    System.out.println("position: ");
+                    String updatePosisi = sc.nextLine();
+                    if (updatePosisi.equalsIgnoreCase("x")) {
+                        displayMenu();
+                        break;
+                    } else {
+                        employee.setPosisi(updatePosisi);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return;
+        }
+
+        // boolean employeeRemoved = false;
+        // Iterator<Employee> iterator = listEmployee.iterator();
+        // while (iterator.hasNext()) {
+        // Employee employee = iterator.next();
+        // if (employee.id() == id) {
+        // tempId = employee.id();
+        // iterator.remove();
+        // employeeRemoved = true;
+        // }
+        // }
+
+        // if (!employeeRemoved) {
+        // System.out.printf("data of id %d not found\n\n", id);
+        // } else {
+        // System.out.print("name: ");
+        // String nama = sc.nextLine();
+
+        // if (nama.equalsIgnoreCase("x")) {
+        // System.out.println("Employee addition canceled.");
+        // displayMenu();
+        // }
+
+        // System.out.println("position: ");
+        // String posisi = sc.nextLine();
+
+        // if (posisi.equalsIgnoreCase("x")) {
+        // System.out.println("Employee addition canceled.");
+        // displayMenu();
+        // }
+        // listEmployee.add(new Employee(tempId, nama, posisi));
+        // }
+
+        displayMenu();
+
     }
 
     private static void removeEmployee() {
+        System.out.println("Remove feature");
         System.out.println("Enter employee id or type 'x' to cancel");
         System.out.print("id: ");
         boolean employeeRemoved = false;
-        long id = sc.nextLong();
+        String input = sc.nextLine();
+        if (input.equalsIgnoreCase("x")) {
+            System.out.println("Removal canceled...");
+            displayMenu();
+        }
 
         // List<Employee> temp = new CopyOnWriteArrayList<>(listEmployee);
         // for (Employee employee : temp) {
@@ -36,20 +111,27 @@ public class Main {
         // listEmployee.remove(employee);
         // }
         // } use CopyOnWriteArrayList
+        try {
 
-        Iterator<Employee> iterator = listEmployee.iterator();
-        while (iterator.hasNext()) {
-            Employee employee = iterator.next();
-            if (employee.id() == id) {
-                iterator.remove();
-                employeeRemoved = true;
+            long id = Long.parseLong(input);
+            Iterator<Employee> iterator = listEmployee.iterator();
+            while (iterator.hasNext()) {
+                Employee employee = iterator.next();
+                if (employee.getId() == id) {
+                    iterator.remove();
+                    employeeRemoved = true;
+                }
             }
-        }
 
-        if (!employeeRemoved) {
-            System.out.printf("data of id %d not found\n\n", id);
-        } else {
-            System.out.printf("data of id %d has been removed\n\n", id);
+            if (!employeeRemoved) {
+                System.out.printf("data of id %d not found\n\n", id);
+            } else {
+                System.out.printf("data of id %d has been removed\n\n", id);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e);
+            return;
         }
 
         displayMenu();
@@ -95,7 +177,8 @@ public class Main {
             System.out.println("|  No Records Found         ");
         } else {
             for (Employee employee : listEmployee) {
-                System.out.printf("| %d  |  %-5s   |  %-8s  \n", employee.id(), employee.name(), employee.position());
+                System.out.printf("| %d  |  %-5s   |  %-8s  \n", employee.getId(), employee.getName(),
+                        employee.getPosisi());
             }
         }
         System.out.println("+----+----------+-----------+");
