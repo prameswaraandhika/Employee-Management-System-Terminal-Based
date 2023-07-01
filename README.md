@@ -69,3 +69,25 @@ To run the Employee Management System program, follow these steps:
 2. Copy the provided code into a Java source file (e.g., `Main.java`).
 
 3. Compile the source file using the following command:
+```
+      javac Main.java
+```
+
+5. Run the compiled program using the following command:
+```
+      java Main
+```
+6. The program will start, and you can interact with it using the provided menu options.
+
+## Limitations
+
+- The program does not persist the employee data after termination. All employee records are stored in memory during program execution.
+
+- The search functionality is case-sensitive. It may not provide accurate results if the search term's case does not match the employee's name or position.
+
+- The program does not include validation for user input. It assumes that the user will enter the expected input format and does not handle incorrect input gracefully.
+
+## Conclusion
+
+The Employee Management System is a simple terminal-based application that allows users to manage a list of employees. It provides essential functionalities such as adding, editing, searching, sorting, and removing employees. This program serves as a starting point and can be expanded or modified to suit specific requirements for managing employee records in various contexts.
+
